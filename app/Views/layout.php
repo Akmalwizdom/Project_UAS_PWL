@@ -42,7 +42,6 @@ if(uri_string()!=""){
             <?= $this->renderSection('content') ?>
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
-            <?= $this->include('components/footer') ?>
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

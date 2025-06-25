@@ -1,81 +1,88 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
-<?php
-// Contoh data produk, biasanya ini akan datang dari database
-$products = [
-    [
-        'id' => 1,
-        'name' => 'ASUS TUF A15 FA506NF',
-        'price' => '10999000',
-        'quantity' => 5,
-        'photo' => '/path/to/your/image/tuf_a15.jpg' // Ganti dengan path gambar yang sesuai
-    ],
-    [
-        'id' => 2,
-        'name' => 'Asus Vivobook 14 A1404ZA',
-        'price' => '6899000',
-        'quantity' => 7,
-        'photo' => '/path/to/your/image/vivobook_14.jpg' // Ganti dengan path gambar yang sesuai
-    ],
-    [
-        'id' => 3,
-        'name' => 'Lenovo IdeaPad Slim 3-14IAU7',
-        'price' => '6299000',
-        'quantity' => 5,
-        'photo' => '/path/to/your/image/ideapad_slim.jpg' // Ganti dengan path gambar yang sesuai
-    ],
-];
-?>
 <div class="main-panel">
     <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">Produk</h3>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/home">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Produk</li>
-                </ol>
-            </nav>
-        </div>
         <div class="row">
-            <div class="col-lg-12 grid-margin stretch-card">
+            <div class="col-12">
+                 <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Manajemen Produk</li>
+                    </ol>
+                </nav>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3 class="font-weight-bold">Manajemen Produk</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <h4 class="card-title">Data Tables</h4>
-                            <div>
-                                <button class="btn btn-primary">Tambah Data</button>
-                                <button class="btn btn-success">Download Data</button>
+                    <div class="card-body m-2">
+                        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+                            <h4 class="card-title mb-3 mb-md-0">Data Produk</h4>
+                            <div class="d-flex align-items-center">
+                                <div class="form-group mb-0 me-2" style="width: 200px;">
+                                    <input type="text" class="form-control form-control-sm" placeholder="Search...">
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary btn-icon-text">
+                                        <i class="mdi mdi-plus-box btn-icon-prepend"></i> Tambah Data
+                                    </button>
+                                    <button class="btn btn-success btn-icon-text">
+                                        <i class="mdi mdi-download btn-icon-prepend"></i> Download Data
+                                    </button>
+                                </div>
                             </div>
                         </div>
+
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Harga</th>
-                                        <th>Jumlah</th>
                                         <th>Foto</th>
+                                        <th>Nama Produk</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah Stok</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($products as $index => $product) : ?>
-                                        <tr>
-                                            <td><?= $index + 1 ?></td>
-                                            <td><?= $product['name'] ?></td>
-                                            <td><?= number_format($product['price'], 0, ',', '.') ?></td>
-                                            <td><?= $product['quantity'] ?></td>
-                                            <td class="py-1">
-                                                <img src="<?= $product['photo'] ?>" alt="image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"/>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-success btn-sm">Ubah</button>
-                                                <button class="btn btn-danger btn-sm">Hapus</button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><img src="assets/images/laptop1.jpg" alt="ASUS TUF A15"></td>
+                                        <td>ASUS TUF A15 FA506NF</td>
+                                        <td>Rp 10.999.000</td>
+                                        <td><div class="badge badge-outline-success">5</div></td>
+                                        <td>
+                                            <button class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i> Ubah</button>
+                                            <button class="btn btn-danger btn-sm"><i class="mdi mdi-delete-forever"></i> Hapus</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td><img src="assets/images/laptop2.jpg" alt="Asus Vivobook"></td>
+                                        <td>Asus Vivobook 14 A1404ZA</td>
+                                        <td>Rp 6.899.000</td>
+                                        <td><div class="badge badge-outline-success">7</div></td>
+                                        <td>
+                                            <button class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i> Ubah</button>
+                                            <button class="btn btn-danger btn-sm"><i class="mdi mdi-delete-forever"></i> Hapus</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><img src="assets/images/laptop3.jpg" alt="Lenovo IdeaPad"></td>
+                                        <td>Lenovo IdeaPad Slim 3</td>
+                                        <td>Rp 6.299.000</td>
+                                        <td><div class="badge badge-outline-warning">5</div></td>
+                                        <td>
+                                            <button class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i> Ubah</button>
+                                            <button class="btn btn-danger btn-sm"><i class="mdi mdi-delete-forever"></i> Hapus</button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -84,5 +91,6 @@ $products = [
             </div>
         </div>
     </div>
+    <?= $this->include('components/footer') ?>
 </div>
 <?= $this->endSection() ?>
