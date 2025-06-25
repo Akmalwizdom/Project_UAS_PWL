@@ -5,83 +5,66 @@
 $username = [
     'name' => 'username',
     'id' => 'username',
-    'class' => 'form-control p_input', 
-    'placeholder' => 'Username or email *', 
+    'class' => 'form-control p_input',
+    'placeholder' => 'Username or email *',
     'type' => 'text'
 ];
 
 $password = [
     'name' => 'password',
     'id' => 'password',
-    'class' => 'form-control p_input', 
-    'placeholder' => 'Password *', 
-    'type' => 'password' 
+    'class' => 'form-control p_input',
+    'placeholder' => 'Password *',
+    'type' => 'password'
 ];
 
 $submit = [
     'type' => 'submit',
-    'class' => 'btn btn-primary btn-block enter-btn', 
-    'value' => 'Login' 
+    'class' => 'btn btn-primary btn-block enter-btn',
+    'value' => 'Login'
 ];
 ?>
 
-<div class="container-scroller">
-    <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="row w-100">
-            <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
-                <div class="card col-lg-4 mx-auto">
-                    <div class="card-body px-5 py-5">
-                        <h3 class="card-title text-start mb-3">Login</h3>
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+    <div class="content-wrapper d-flex align-items-center auth login-bg">
+        <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+                <div class="card py-5 px-4 shadow">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-3">Login</h3>
 
-                        <?php
-                        
-                        if (session()->getFlashData('failed')) {
-                        ?>
-                            <div class="col-12 alert alert-danger" role="alert">
+                        <?php if (session()->getFlashData('failed')): ?>
+                            <div class="alert alert-danger" role="alert">
                                 <hr>
-                                <p class="mb-0">
-                                    <?= session()->getFlashData('failed') ?>
-                                </p>
+                                <p class="mb-0"><?= session()->getFlashData('failed') ?></p>
                             </div>
-                        <?php
-                        }
-                        ?>
+                        <?php endif; ?>
 
-                        <?= form_open('login', 'class="pt-3"')?>
+                        <?= form_open('login', 'class="pt-3"') ?>
 
                             <div class="form-group">
-                                <label>Username or email *</label>
+                                <label>Username *</label>
                                 <?= form_input($username) ?>
                             </div>
+
                             <div class="form-group">
                                 <label>Password *</label>
                                 <?= form_password($password) ?>
                             </div>
-                            <div class="form-group d-flex align-items-center justify-content-between">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input"> Remember me
-                                    </label>
-                                </div>
-                                <a href="#" class="forgot-pass">Forgot password</a>
-                            </div>
-                            <div class="text-center d-grid gap-2">
+
+                            <div class="text-center d-grid gap-2 mt-3">
                                 <?= form_submit($submit) ?>
                             </div>
-                            <div class="d-flex">
-                                <button class="btn btn-facebook me-2 col">
-                                    <i class="mdi mdi-facebook"></i> Facebook
-                                </button>
-                                <button class="btn btn-google col">
-                                    <i class="mdi mdi-google-plus"></i> Google plus
-                                </button>
-                            </div>
-                            <p class="sign-up">Don't have an Account?<a href="#"> Sign Up</a></p>
                         <?= form_close() ?>
+                        <!-- Credits -->
+                        <div class="credits text-center mt-3">
+                          Designed by <a href="https://www.bootstrapdash.com/">BootstrapDash</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
         </div>
     </div>
+</div>
+
 <?= $this->endSection() ?>

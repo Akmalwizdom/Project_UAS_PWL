@@ -10,7 +10,7 @@ if(uri_string()!=""){
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>- Toko - <?php echo $hlm ?></title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url()?>corona/dist/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url()?>corona/dist/assets/vendors/ti-icons/css/themify-icons.css">
@@ -32,7 +32,6 @@ if(uri_string()!=""){
   </head>
   <body>
     <div class="container-scroller">
-
       <!-- partial:partials/_sidebar.html -->
         <?= $this->include('components/sidebar') ?>
       <!-- partial -->

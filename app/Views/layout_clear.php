@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>- Toko -</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url()?>corona/dist/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url()?>corona/dist/assets/vendors/ti-icons/css/themify-icons.css">
@@ -70,4 +70,3 @@
     <!-- End custom js for this page -->
   </body>
 </html>
-<?= $this->endSection() ?>
