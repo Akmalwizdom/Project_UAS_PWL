@@ -6,7 +6,7 @@ $username = [
     'name' => 'username',
     'id' => 'username',
     'class' => 'form-control p_input',
-    'placeholder' => 'Username or email *',
+    'placeholder' => 'Username *',
     'type' => 'text'
 ];
 
