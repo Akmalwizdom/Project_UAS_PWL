@@ -32,7 +32,7 @@
       <!-- partial:partials/_sidebar.html -->
        
       <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
         <!-- partial:partials/_navbar.html -->
             
         <!-- partial -->
