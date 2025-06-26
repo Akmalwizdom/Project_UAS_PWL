@@ -98,9 +98,11 @@
                             <a href="<?= base_url('keranjang/clear') ?>" class="btn btn-warning btn-icon-text me-2">
                                 <i class="mdi mdi-cart-remove btn-icon-prepend"></i> Kosongkan Keranjang
                             </a>
-                            <a href="<?= base_url('checkout') ?>" class="btn btn-success btn-icon-text">
-                                <i class="mdi mdi-check-circle btn-icon-prepend"></i> Selesai Belanja
-                            </a>
+                            <?php if (!empty($items)) : ?>
+                                <a href="<?= base_url('checkout') ?>" class="btn btn-success btn-icon-text">
+                                    <i class="mdi mdi-check-circle btn-icon-prepend"></i> Selesai Belanja
+                                </a>
+                            <?php endif; ?>
                         </div>
 
                         <?= form_close() ?>
