@@ -1,21 +1,40 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
+
 <div class="main-panel">
     <div class="content-wrapper">
+
+        <!-- Flash Messages -->
+        <?php if (session()->getFlashData('success')) : ?>
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <?= session()->getFlashData('success') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashData('failed')) : ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= session()->getFlashData('failed') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <!-- Breadcrumb -->
         <div class="row">
             <div class="col-12">
-                 <nav aria-label="breadcrumb">
+                <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Manajemen Produk</li>
                     </ol>
                 </nav>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                <h3 class="font-weight-bold">Manajemen Produk</h3>
+                    <h3 class="font-weight-bold">Manajemen Produk</h3>
                 </div>
             </div>
         </div>
 
+        <!-- Table & Button -->
         <div class="row mb-5">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
@@ -27,7 +46,8 @@
                                     <input type="text" class="form-control form-control-sm" placeholder="Search...">
                                 </div>
                                 <div>
-                                    <button class="btn btn-primary btn-icon-text">
+                                    <!-- Tombol Modal -->
+                                    <button type="button" class="btn btn-primary btn-icon-text me-2" data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="mdi mdi-plus-box btn-icon-prepend"></i> Tambah Data
                                     </button>
                                     <button class="btn btn-success btn-icon-text">
@@ -37,6 +57,7 @@
                             </div>
                         </div>
 
+                        <!-- Tabel Produk -->
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -50,47 +71,130 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td><img src="assets/images/laptop1.jpg" alt="ASUS TUF A15"></td>
-                                        <td>ASUS TUF A15 FA506NF</td>
-                                        <td>Rp 10.999.000</td>
-                                        <td><div class="badge badge-outline-success">5</div></td>
-                                        <td>
-                                            <button class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i> Ubah</button>
-                                            <button class="btn btn-danger btn-sm"><i class="mdi mdi-delete-forever"></i> Hapus</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img src="assets/images/laptop2.jpg" alt="Asus Vivobook"></td>
-                                        <td>Asus Vivobook 14 A1404ZA</td>
-                                        <td>Rp 6.899.000</td>
-                                        <td><div class="badge badge-outline-success">7</div></td>
-                                        <td>
-                                            <button class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i> Ubah</button>
-                                            <button class="btn btn-danger btn-sm"><i class="mdi mdi-delete-forever"></i> Hapus</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><img src="assets/images/laptop3.jpg" alt="Lenovo IdeaPad"></td>
-                                        <td>Lenovo IdeaPad Slim 3</td>
-                                        <td>Rp 6.299.000</td>
-                                        <td><div class="badge badge-outline-warning">5</div></td>
-                                        <td>
-                                            <button class="btn btn-warning btn-sm"><i class="mdi mdi-pencil"></i> Ubah</button>
-                                            <button class="btn btn-danger btn-sm"><i class="mdi mdi-delete-forever"></i> Hapus</button>
-                                        </td>
-                                    </tr>
+                                    <?php foreach ($product as $index => $produk) : ?>
+                                        <tr>
+                                            <td><?= $index + 1 ?></td>
+                                            <td>
+                                                <?php if (!empty($produk['foto']) && file_exists(FCPATH . 'img/' . $produk['foto'])) : ?>
+                                                    <img src="<?= base_url('img/' . $produk['foto']) ?>" alt="<?= $produk['nama'] ?>" width="100px">
+                                                <?php else : ?>
+                                                    <span class="text-muted">Tidak ada foto</span>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?= esc($produk['nama']) ?></td>
+                                            <td><?= esc($produk['harga']) ?></td>
+                                            <td>
+                                                <div class="badge badge-outline-<?= ($produk['jumlah'] > 5) ? 'success' : 'warning' ?>">
+                                                    <?= $produk['jumlah'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal-<?= $produk['id'] ?>">
+                                                    <i class="mdi mdi-pencil"></i> Ubah
+                                                </button>
+
+                                                <a href="<?= base_url('produk/delete/' . $produk['id']) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin menghapus?')">
+                                                    <i class="mdi mdi-delete-forever"></i> Hapus
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tr>
+
+                                        <!-- Edit Modal Begin -->
+                                        <div class="modal fade" id="editModal-<?= $produk['id'] ?>" tabindex="-1">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Edit Data</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <form action="<?= base_url('produk/edit/' . $produk['id']) ?>" method="post" enctype="multipart/form-data">
+                                                        <?= csrf_field(); ?>
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="name">Nama</label>
+                                                                <input type="text" name="nama" class="form-control" value="<?= esc($produk['nama']) ?>" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="name">Harga</label>
+                                                                <input type="text" name="harga" class="form-control" value="<?= esc($produk['harga']) ?>" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="name">Jumlah</label>
+                                                                <input type="text" name="jumlah" class="form-control" value="<?= esc($produk['jumlah']) ?>" required>
+                                                            </div>
+                                                            <?php if (!empty($produk['foto']) && file_exists(FCPATH . 'img/' . $produk['foto'])) : ?>
+                                                                <img src="<?= base_url('img/' . $produk['foto']) ?>" width="100px">
+                                                            <?php endif; ?>
+                                                            <div class="form-check mt-2">
+                                                                <input class="form-check-input" type="checkbox" id="check<?= $produk['id'] ?>" name="check" value="1">
+                                                                <label class="form-check-label" for="check<?= $produk['id'] ?>">
+                                                                    Ceklis jika ingin mengganti foto
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-group mt-2">
+                                                                <label for="name">Foto Baru</label>
+                                                                <input type="file" class="form-control" name="foto">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Edit Modal End -->
+
+                                    <?php endforeach ?>
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal Tambah Data -->
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="<?= base_url('produk') ?>" method="post" enctype="multipart/form-data">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addModalLabel">Tambah Produk</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group mb-2">
+                                <label>Nama Produk</label>
+                                <input type="text" name="nama" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>Harga</label>
+                                <input type="number" name="harga" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>Jumlah Stok</label>
+                                <input type="number" name="jumlah" class="form-control" required>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label>Foto Produk</label>
+                                <input type="file" name="foto" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </div>
     <?= $this->include('components/footer') ?>
 </div>
+
 <?= $this->endSection() ?>
