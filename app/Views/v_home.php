@@ -1,7 +1,17 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
+
 <div class="main-panel">
     <div class="content-wrapper">
+
+        <!-- Flash Message -->
+        <?php if (session()->getFlashData('success')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashData('success') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
         <!-- Header Section -->
         <div class="row">
             <div class="col-12">
@@ -33,27 +43,39 @@
                             </div>
                         </div>
 
+                        <!-- Produk Cards -->
                         <div class="row">
                             <?php foreach ($product as $key => $item) : ?>
                                 <div class="col-md-4 grid-margin stretch-card">
+                                    <?= form_open('keranjang') ?>
+                                    <?= form_hidden('id', $item['id']) ?>
+                                    <?= form_hidden('nama', $item['nama']) ?>
+                                    <?= form_hidden('harga', $item['harga']) ?>
+                                    <?= form_hidden('foto', $item['foto']) ?>
+
                                     <div class="card">
                                         <div class="card-body text-center">
-                                            <img src="<?php echo base_url() . 'img/' . $item['foto']; ?>" alt="<?php echo $item['nama']; ?>" class="img-fluid mb-3" style="max-height: 200px; border-radius: 8px;">
-                                            <h5 class="card-title"><?php echo $item['nama']; ?></h5>
-                                            <h4 class="text-primary font-weight-bold">Rp <?php echo number_format($item['harga'], 0, ',', '.'); ?></h4>
-                                            <button class="btn btn-primary btn-rounded">
-                                                <i class="mdi mdi-cart-plus me-2"></i>Tambah ke Keranjang
+                                            <img src="<?= base_url('img/' . $item['foto']) ?>" alt="<?= $item['nama'] ?>" class="img-fluid mb-3" style="max-height: 200px; border-radius: 8px;">
+                                            <h5 class="card-title"><?= $item['nama'] ?></h5>
+                                            <h4 class="text-primary font-weight-bold">Rp <?= number_format($item['harga'], 0, ',', '.') ?></h4>
+                                            <button type="submit" class="btn btn-info rounded-pill">
+                                                <i class="mdi mdi-cart-plus me-2"></i>Beli
                                             </button>
                                         </div>
                                     </div>
+                                    <?= form_close() ?>
                                 </div>
-                            <?php endforeach; ?>
+                            <?php endforeach ?>
                         </div>
+                        <!-- End Produk Cards -->
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <?= $this->include('components/footer') ?>
 </div>
+
 <?= $this->endSection() ?>
