@@ -19,151 +19,66 @@
             </div>
         </div>
 
+        <!-- Flash Message -->
+        <?php if (session()->getFlashdata('success')) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('success') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
         <!-- Cart Table Section -->
         <div class="row">
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h4 class="card-title mb-0">Keranjang</h4>
-                            <div class="d-flex align-items-center">
-                                <div class="form-group mb-0" style="width: 200px;">
-                                    <input type="text" class="form-control form-control-sm" placeholder="Search...">
-                                </div>
-                            </div>
-                        </div>
-
+                        <?= form_open('keranjang/edit') ?>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            Nama
-                                            <i class="mdi mdi-sort-variant ml-1"></i>
-                                        </th>
-                                        <th>
-                                            Foto
-                                            <i class="mdi mdi-sort-variant ml-1"></i>
-                                        </th>
-                                        <th>
-                                            Harga
-                                            <i class="mdi mdi-sort-variant ml-1"></i>
-                                        </th>
-                                        <th>
-                                            Jumlah
-                                            <i class="mdi mdi-sort-variant ml-1"></i>
-                                        </th>
+                                        <th>Nama</th>
+                                        <th>Foto</th>
+                                        <th>Harga</th>
+                                        <th>Jumlah</th>
                                         <th>Subtotal</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>ASUS TUF A15 FA506NF</td>
-                                        <td>
-                                            <img src="<?= base_url()?>assets/images/laptop1.jpg" 
-                                                 alt="ASUS TUF A15" 
-                                                 style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
-                                        </td>
-                                        <td>IDR 10,999,000</td>
-                                        <td>
-                                            <div class="input-group" style="width: 120px;">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                                        <i class="mdi mdi-minus"></i>
-                                                    </button>
-                                                </div>
-                                                <input type="number" class="form-control form-control-sm text-center" value="1" min="1">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="font-weight-bold">IDR 10,999,000</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm btn-icon-text">
-                                                <i class="mdi mdi-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Asus Vivobook 14 A1404ZA</td>
-                                        <td>
-                                            <img src="<?= base_url()?>assets/images/laptop2.jpg" 
-                                                 alt="Asus Vivobook" 
-                                                 style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
-                                        </td>
-                                        <td>IDR 6,899,000</td>
-                                        <td>
-                                            <div class="input-group" style="width: 120px;">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                                        <i class="mdi mdi-minus"></i>
-                                                    </button>
-                                                </div>
-                                                <input type="number" class="form-control form-control-sm text-center" value="1" min="1">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="font-weight-bold">IDR 6,899,000</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm btn-icon-text">
-                                                <i class="mdi mdi-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Asus Vivobook 14 A1404ZA</td>
-                                        <td>
-                                            <img src="<?= base_url()?>assets/images/laptop2.jpg" 
-                                                 alt="Asus Vivobook" 
-                                                 style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
-                                        </td>
-                                        <td>IDR 6,899,000</td>
-                                        <td>
-                                            <div class="input-group" style="width: 120px;">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                                        <i class="mdi mdi-minus"></i>
-                                                    </button>
-                                                </div>
-                                                <input type="number" class="form-control form-control-sm text-center" value="1" min="1">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-secondary btn-sm" type="button">
-                                                        <i class="mdi mdi-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="font-weight-bold">IDR 6,899,000</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm btn-icon-text">
-                                                <i class="mdi mdi-delete"></i>
-                                            </button>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    $i = 1;
+                                    foreach ($items as $item) :
+                                    ?>
+                                        <tr>
+                                            <td><?= $item['name'] ?></td>
+                                            <td>
+                                                <img src="<?= base_url('img/' . $item['options']['foto']) ?>" 
+                                                     alt="<?= $item['name'] ?>" 
+                                                     style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                            </td>
+                                            <td><?= number_to_currency($item['price'], 'IDR') ?></td>
+                                            <td>
+                                                <input type="number" class="form-control form-control-sm text-center"
+                                                       name="qty<?= $i++ ?>" value="<?= $item['qty'] ?>" min="1">
+                                            </td>
+                                            <td class="font-weight-bold"><?= number_to_currency($item['subtotal'], 'IDR') ?></td>
+                                            <td>
+                                                <a href="<?= base_url('keranjang/delete/' . $item['rowid']) ?>" class="btn btn-danger btn-sm">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach ?>
                                 </tbody>
                             </table>
-                        </div>
-
-                        <!-- Pagination Info -->
-                        <div class="d-flex justify-content-between align-items-center mt-4">
-                            <div class="text-muted">
-                                Showing 1 to 2 of 2 entries
-                            </div>
                         </div>
 
                         <!-- Total Section -->
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="alert alert-info">
-                                    <h5 class="font-weight-bold mb-0">Total = IDR 17,898,000</h5>
+                                    <h5 class="font-weight-bold mb-0">Total = <?= number_to_currency($total, 'IDR') ?></h5>
                                 </div>
                             </div>
                         </div>
@@ -171,22 +86,18 @@
                         <!-- Action Buttons -->
                         <div class="row mt-3">
                             <div class="col-12">
-                                <div class="btn-group-toggle" data-toggle="buttons">
-                                    <button class="btn btn-primary btn-icon-text mr-2">
-                                        <i class="mdi mdi-refresh btn-icon-prepend"></i>
-                                        Perbarui Keranjang
-                                    </button>
-                                    <button class="btn btn-warning btn-icon-text mr-2">
-                                        <i class="mdi mdi-cart-remove btn-icon-prepend"></i>
-                                        Kosongkan Keranjang
-                                    </button>
-                                    <button class="btn btn-success btn-icon-text">
-                                        <i class="mdi mdi-check-circle btn-icon-prepend"></i>
-                                        Selesai Belanja
-                                    </button>
-                                </div>
+                                <button type="submit" class="btn btn-primary btn-icon-text me-2">
+                                    <i class="mdi mdi-refresh btn-icon-prepend"></i> Perbarui Keranjang
+                                </button>
+                                <a href="<?= base_url('keranjang/clear') ?>" class="btn btn-warning btn-icon-text me-2">
+                                    <i class="mdi mdi-cart-remove btn-icon-prepend"></i> Kosongkan Keranjang
+                                </a>
+                                <a href="<?= base_url('checkout') ?>" class="btn btn-success btn-icon-text">
+                                    <i class="mdi mdi-check-circle btn-icon-prepend"></i> Selesai Belanja
+                                </a>
                             </div>
                         </div>
+                        <?= form_close() ?>
                     </div>
                 </div>
             </div>
