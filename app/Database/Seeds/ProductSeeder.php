@@ -11,24 +11,45 @@ class ProductSeeder extends Seeder
         // membuat data
         $data = [
             [
-                'nama' => 'ASUS TUF A15 FA506NF',
-                'harga'  => 10899000,
-                'jumlah' => 5,
-                'foto' => 'asus_tuf_a15.jpg',
+                'nama' => 'Rolex Submariner Date',
+                'harga'  => 135000000,
+                'jumlah' => 3,
+                'foto' => 'rolex_submariner.jpg',
                 'created_at' => date("Y-m-d H:i:s"),
             ],
             [
-                'nama' => 'Asus Vivobook 14 A1404ZA',
-                'harga'  => 6899000,
-                'jumlah' => 7,
-                'foto' => 'asus_vivobook_14.jpg',
+                'nama' => 'Omega Seamaster Diver 300M',
+                'harga'  => 82000000,
+                'jumlah' => 5,
+                'foto' => 'omega_seamaster.jpg',
                 'created_at' => date("Y-m-d H:i:s"),
             ],
             [
-                'nama' => 'Lenovo IdeaPad Slim 3-14IAU7',
-                'harga'  => 6299000,
-                'jumlah' => 5,
-                'foto' => 'lenovo_idepad_slim_3.jpg',
+                'nama' => 'Tag Heuer Carrera Calibre 5',
+                'harga'  => 45000000,
+                'jumlah' => 4,
+                'foto' => 'tag_heuer_carrera.jpg',
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'nama' => 'Cartier Santos de Cartier',
+                'harga'  => 105000000,
+                'jumlah' => 2,
+                'foto' => 'cartier_santos.jpg',
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'nama' => 'Patek Philippe Nautilus',
+                'harga'  => 250000000,
+                'jumlah' => 1,
+                'foto' => 'patek_philippe_nautilus.jpg',
+                'created_at' => date("Y-m-d H:i:s"),
+            ],
+            [
+                'nama' => 'Audemars Piguet Royal Oak',
+                'harga'  => 180000000,
+                'jumlah' => 2,
+                'foto' => 'audemars_piguet_royal_oak.jpg',
                 'created_at' => date("Y-m-d H:i:s"),
             ]
         ];
