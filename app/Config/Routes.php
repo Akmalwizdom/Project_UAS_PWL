@@ -25,6 +25,13 @@ $routes->group('produk', ['filter' => 'auth'], function ($routes) {
     $routes->post('', 'ProdukController::create');
     $routes->post('edit/(:any)', 'ProdukController::edit/$1');
     $routes->get('delete/(:any)', 'ProdukController::delete/$1');
-}); 
 
-$routes->get('keranjang', 'TransaksiController::index', ['filter' => 'auth']);
+    $routes->get('download', 'ProdukController::download');
+
+}); 
+$routes->post('keranjang/edit', 'Keranjang::edit');
+$routes->get('keranjang/delete/(:any)', 'Keranjang::delete/$1');
+$routes->get('keranjang/clear', 'Keranjang::clear');
+$routes->get('checkout', 'Checkout::index'); // Jika kamu punya halaman checkout
+
+

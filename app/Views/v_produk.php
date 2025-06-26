@@ -50,9 +50,10 @@
                                     <button type="button" class="btn btn-primary btn-icon-text me-2" data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="mdi mdi-plus-box btn-icon-prepend"></i> Tambah Data
                                     </button>
-                                    <button class="btn btn-success btn-icon-text">
+
+                                    <a type="button" class="btn btn-success btn-icon-text" href="<?= base_url() ?> produk/download">
                                         <i class="mdi mdi-download btn-icon-prepend"></i> Download Data
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
