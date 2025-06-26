@@ -52,7 +52,7 @@
                                     </button>
 
                                     <a type="button" class="btn btn-success btn-icon-text" href="<?= base_url() ?> produk/download">
-                                        <i class="mdi mdi-download btn-icon-prepend"></i> Download Data
+                                       Download Data
                                     </a>
                                 </div>
                             </div>
