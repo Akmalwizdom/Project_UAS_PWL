@@ -1,4 +1,9 @@
-
+<?php
+$hlm = "Home";
+if (uri_string() != "") {
+  $hlm = ucwords(uri_string());
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +11,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>- Toko -</title>
+    <title>- Prestige Watches - <?php echo $hlm ?></title>
+
     <!-- plugins:css -->
     <link rel="stylesheet" href="<?= base_url()?>corona/dist/assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url()?>corona/dist/assets/vendors/ti-icons/css/themify-icons.css">
