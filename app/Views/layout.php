@@ -11,7 +11,7 @@ if (uri_string() != "") {
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>- Toko - <?php echo $hlm ?></title>
+  <title>- Prestige Watches - <?php echo $hlm ?></title>
 
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?= base_url() ?>corona/dist/assets/vendors/mdi/css/materialdesignicons.min.css">
