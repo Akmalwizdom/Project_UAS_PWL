@@ -58,7 +58,7 @@
                 <div class="card text-center">
                     <div class="card-body py-3">
                         <i class="mdi mdi-truck-delivery text-info fs-2"></i>
-                        <h6 class="mt-2 mb-0">Gratis Ongkir</h6>
+                        <h6 class="mt-2 mb-0">Pengiriman Cepat</h6>
                     </div>
                 </div>
             </div>
