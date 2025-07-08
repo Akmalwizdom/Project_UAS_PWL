@@ -127,9 +127,13 @@
                                             
                                             <!-- Quick Action -->
                                             <div class="position-absolute top-0 end-0 m-2">
-                                                <button class="btn btn-light btn-sm rounded-circle" 
+                                                <button class="btn btn-light btn-sm rounded-circle btn-detail" 
                                                         data-bs-toggle="tooltip" 
-                                                        title="Lihat Detail">
+                                                        title="Lihat Detail"
+                                                        data-id="<?= $item['id'] ?>"
+                                                        data-nama="<?= $item['nama'] ?>"
+                                                        data-harga="<?= $item['harga'] ?>"
+                                                        data-foto="<?= $item['foto'] ?>">
                                                     <i class="mdi mdi-eye"></i>
                                                 </button>
                                             </div>
@@ -222,38 +226,6 @@
             </div>
         </div>
 
-        <!-- Newsletter Section -->
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="card bg-info text-white">
-                    <div class="card-body text-center py-5">
-                        <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <i class="mdi mdi-email-newsletter display-4 mb-3"></i>
-                                <h4 class="fw-bold mb-3">Dapatkan Penawaran Terbaik</h4>
-                                <p class="mb-4 fs-6">Berlangganan newsletter kami untuk mendapatkan update produk terbaru, penawaran spesial, dan tips perawatan jam tangan</p>
-                                
-                                <div class="row justify-content-center">
-                                    <div class="col-md-8">
-                                        <div class="input-group">
-                                            <input type="email" class="form-control form-control-lg" placeholder="Masukkan email Anda">
-                                            <button class="btn btn-light btn-lg fw-bold text-info" type="button">
-                                                <i class="mdi mdi-send me-2"></i>Berlangganan
-                                            </button>
-                                        </div>
-                                        <small class="d-block mt-2 opacity-75">
-                                            <i class="mdi mdi-shield-check me-1"></i>
-                                            Email Anda aman bersama kami
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Feature Highlights -->
         <div class="row mt-4">
             <div class="col-md-4">
@@ -295,5 +267,235 @@
 
     <?= $this->include('components/footer') ?>
 </div>
+
+<!-- Modal Detail Produk -->
+<div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="productDetailModalLabel">
+                    <i class="mdi mdi-watch me-2 text-primary"></i>
+                    Detail Produk
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-4">
+                    <!-- Product Image -->
+                    <div class="col-md-6">
+                        <div class="position-relative">
+                            <img id="modalProductImage" 
+                                 src="" 
+                                 alt="" 
+                                 class="img-fluid rounded shadow-sm w-100"
+                                 style="height: auto; object-fit: cover;">
+                            <span class="position-absolute top-0 start-0 m-2 badge bg-success">Terbaru</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Info -->
+                    <div class="col-md-6">
+                        <div class="h-100 d-flex flex-column">
+                            <h4 id="modalProductName" class="fw-bold mb-3"></h4>
+                            
+                            <!-- Rating -->
+                            <div class="mb-3">
+                                <span class="text-warning">
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star"></i>
+                                    <i class="mdi mdi-star-outline"></i>
+                                </span>
+                                <small class="text-muted ms-1">(4.0) • 127 ulasan</small>
+                            </div>
+                            
+                            <!-- Price -->
+                            <div class="mb-4">
+                                <h3 id="modalProductPrice" class="text-primary fw-bold mb-1"></h3>
+                                <small class="text-muted">
+                                    <i class="mdi mdi-tag me-1"></i>Harga terbaik • Cicilan 0%
+                                </small>
+                            </div>
+                            
+                            <!-- Features -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-2">Fitur Unggulan:</h6>
+                                <ul class="list-unstyled mb-0">
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-check-circle text-success me-2"></i>
+                                        <small>Garansi resmi 2 tahun</small>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-truck text-info me-2"></i>
+                                        <small>Gratis ongkir seluruh Indonesia</small>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-shield-check text-warning me-2"></i>
+                                        <small>Waterproof hingga 50 meter</small>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="mdi mdi-battery text-success me-2"></i>
+                                        <small>Baterai tahan hingga 5 tahun</small>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Specifications -->
+                            <div class="mb-4">
+                                <h6 class="fw-bold mb-2">Spesifikasi:</h6>
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <small class="text-muted">Material:</small>
+                                        <div class="fw-bold">Stainless Steel</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Diameter:</small>
+                                        <div class="fw-bold">42mm</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Tipe:</small>
+                                        <div class="fw-bold">Analog</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <small class="text-muted">Warna:</small>
+                                        <div class="fw-bold">Silver</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Stock Status -->
+                            <div class="mb-4">
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi mdi-check-circle text-success me-2"></i>
+                                    <span class="text-success fw-bold">Stok tersedia</span>
+                                    <span class="ms-2 text-muted">(12 unit)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <div class="w-100">
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-outline-secondary w-100">
+                                <i class="mdi mdi-heart-outline me-2"></i>
+                                Tambah ke Wishlist
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-primary w-100" id="modalAddToCart">
+                                <i class="mdi mdi-cart-plus me-2"></i>
+                                Tambah ke Keranjang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Inisialisasi semua tooltip di halaman
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+    const productDetailModal = new bootstrap.Modal(document.getElementById('productDetailModal'));
+    const modalElement = document.getElementById('productDetailModal');
+    const modal = {
+        name: modalElement.querySelector('#modalProductName'),
+        price: modalElement.querySelector('#modalProductPrice'),
+        image: modalElement.querySelector('#modalProductImage'),
+        addToCartBtn: modalElement.querySelector('#modalAddToCart')
+    };
+
+    // --- Helper Function ---
+    const createAndSubmitForm = (data) => {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '<?= base_url('keranjang') ?>';
+        form.style.display = 'none';
+
+        for (const key in data) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        }
+
+        document.body.appendChild(form);
+        form.submit();
+    };
+
+    // --- Event Listeners ---
+
+    // Event Delegation untuk Aksi pada Produk dan Modal
+    document.body.addEventListener('click', (e) => {
+        const detailButton = e.target.closest('.btn-detail');
+        const addToCartInModalBtn = e.target.closest('#modalAddToCart');
+
+        // Tombol "Lihat Detail" diklik
+        if (detailButton) {
+            const { id, nama, harga, foto } = detailButton.dataset;
+            
+            modal.name.textContent = nama;
+            modal.price.textContent = `Rp ${new Intl.NumberFormat('id-ID').format(harga)}`;
+
+            modal.image.src = `<?= base_url('img/') ?>${foto}`;
+
+            modal.image.alt = nama;
+            
+            // Simpan data di tombol "Tambah ke Keranjang" pada modal
+            Object.assign(modal.addToCartBtn.dataset, { id, nama, harga, foto });
+
+            productDetailModal.show();
+        }
+
+        // Tombol "Tambah ke Keranjang" di dalam modal diklik
+        if (addToCartInModalBtn) {
+            createAndSubmitForm(addToCartInModalBtn.dataset);
+        }
+    });
+
+    // Pencarian Produk
+    document.querySelector('input[placeholder="Cari produk..."]').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        document.querySelectorAll('.col-lg-4.col-md-6').forEach(card => {
+            const productName = card.querySelector('.card-title').textContent.toLowerCase();
+            card.style.display = productName.includes(searchTerm) ? 'block' : 'none';
+        });
+    });
+
+    // Tombol "Muat Lebih Banyak"
+    document.querySelector('.btn-outline-primary').addEventListener('click', function() {
+        const originalText = this.innerHTML;
+        this.innerHTML = '<i class="mdi mdi-loading mdi-spin me-2"></i>Memuat...';
+        this.disabled = true;
+
+        setTimeout(() => {
+            this.innerHTML = originalText;
+            this.disabled = false;
+            
+            const alertContainer = this.parentElement;
+            if (!alertContainer.querySelector('.alert-info')) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-info alert-dismissible fade show mt-3';
+                alert.innerHTML = `
+                    <i class="mdi mdi-information me-2"></i>
+                    Tidak ada produk lagi untuk dimuat.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+                alertContainer.appendChild(alert);
+                
+                setTimeout(() => alert.remove(), 5000);
+            }
+        }, 2000);
+    });
+});
+</script>
 
 <?= $this->endSection() ?>
