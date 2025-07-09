@@ -129,15 +129,15 @@
                                     <span>Subtotal:</span>
                                     <span><?= number_to_currency($total, 'IDR') ?></span>
                                 </div>
-<div class="d-flex justify-content-between">
-    <span>Ongkos Kirim:</span>
-    <span id="ongkir_display">Rp 0</span>
-</div>
-<hr>
-<div class="d-flex justify-content-between">
-    <h5 class="mb-0">Total Pembayaran:</h5>
-    <h5 class="mb-0" id="total_display"><?= number_to_currency($total, 'IDR') ?></h5>
-</div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Ongkos Kirim:</span>
+                                    <span id="ongkir_display">Rp 0</span>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mb-0">Total Pembayaran:</h5>
+                                    <h5 class="mb-0" id="total_display"><?= number_to_currency($total, 'IDR') ?></h5>
+                                </div>
                             </div>
                         </div>
 
@@ -232,22 +232,22 @@
             hitungTotal();
         });
 
-function hitungTotal() {
-    total = ongkir + <?= $total ?>;
+        function hitungTotal() {
+            total = ongkir + <?= $total ?>;
 
-    $("#ongkir").val(ongkir);
-    $("#total_harga").val(total);
+            $("#ongkir").val(ongkir);
+            $("#total_harga").val(total);
 
-    // Format IDR
-    const formatter = new Intl.NumberFormat('id-ID', {
-        style: 'currency',
-        currency: 'IDR',
-        minimumFractionDigits: 0
-    });
+            // Format IDR
+            const formatter = new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            });
 
-    $("#ongkir_display").html(formatter.format(ongkir));
-    $("#total_display").html(formatter.format(total));
-}
+            $("#ongkir_display").html(formatter.format(ongkir));
+            $("#total_display").html(formatter.format(total));
+        }
 
     });
 </script>

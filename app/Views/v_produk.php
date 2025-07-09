@@ -64,7 +64,7 @@
                                         <span class="input-group-text bg-white border-end-0">
                                             <i class="mdi mdi-magnify text-muted"></i>
                                         </span>
-                                        <input type="text" class="form-control" placeholder="Cari produk...">
+                                        <input type="text" class="form-control" placeholder="Cari produk..." id="searchInput">
                                     </div>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                                         <i class="mdi mdi-plus-box-outline me-1"></i> Tambah
@@ -75,7 +75,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="productTable">
                                 <thead>
                                     <tr class="table-light">
                                         <th class="ps-3">#</th>
@@ -89,7 +89,7 @@
                                     <?php foreach ($product as $index => $produk) : ?>
                                         <tr>
                                             <td class="ps-3 align-middle"><?= $index + 1 ?></td>
-                                            <td class="align-middle">
+                                            <td class="align-middle product-name-cell">
                                                 <div class="d-flex align-items-center">
                                                     <?php if (!empty($produk['foto']) && file_exists(FCPATH . 'img/' . $produk['foto'])) : ?>
                                                         <img src="<?= base_url('img/' . $produk['foto']) ?>" alt="<?= esc($produk['nama']) ?>" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
@@ -216,5 +216,20 @@
     </div>
     <?= $this->include('components/footer') ?>
 </div>
+
+<script>
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const productRows = document.querySelectorAll('#productTable tbody tr'); 
+
+        productRows.forEach(row => {
+            const productNameCell = row.querySelector('.product-name-cell span'); 
+            if (productNameCell) {
+                const productName = productNameCell.textContent.toLowerCase();
+                row.style.display = productName.includes(searchTerm) ? '' : 'none';
+            }
+        });
+    });
+</script>
 
 <?= $this->endSection() ?>
